@@ -2,17 +2,10 @@
 declare -r alias_maker_version="1.0.0"
 declare -r alias_maker_name="alias-maker"
 
-# Check if Oh My Zsh is installed
-#if [[ -z "$ZSH" ]]; then
-   # echo "Error: Oh My Zsh is not installed on your system. Please install it before using the $alias_maker_name plugin."
-   # echo "You can download Oh My Zsh from https://ohmyz.sh"
-   # return 1
-#fi
-
-# Check if .zshrc file exists
+# Check if .zshrc_aliases file exists
 if [[ ! -f "$HOME/.zshrc" ]]; then
-    echo "Creating .zshrc file..."
-    touch "$HOME/.zshrc"
+    echo "Creating aliases file..."
+    touch "$HOME/.zshrc_aliases"
 fi
 
 # Define the main function for the alias_maker plugin
@@ -60,7 +53,7 @@ function amc() {
     fi
 
     # Create the new alias and save it to the .zshrc file
-    echo "alias $alias_name=\"$alias_command\"" >>~/.zshrc
+    echo "alias $alias_name=\"$alias_command\"" >>~/.zshrc_aliases
     source ~/.zshrc
 
     # Output the success message
@@ -92,10 +85,10 @@ function amd() {
 # Define a function to list all custom zsh aliases
 function list_aliases() {
     local -a aliases=()
-    local rc_file="$HOME/.zshrc"
-    # Check if .zshrc file exists
+    local rc_file="$HOME/.zshrc_aliases"
+    # Check if .zshrc_aliases file exists
     if [ ! -f "$rc_file" ]; then
-        echo "No .zshrc file found." >&2
+        echo "No .zshrc_aliases file found." >&2
         return 1
     fi
 
@@ -108,7 +101,7 @@ function list_aliases() {
 
     # Check if any aliases were found
     if [ ${#aliases[@]} -gt 0 ]; then
-        echo "🔧 Custom aliases found in $HOME/.zshrc:"
+        echo "🔧 Custom aliases found in $HOME/.zshrc_aliases:"
         echo ""
 
         for alias in "${aliases[@]}"; do
