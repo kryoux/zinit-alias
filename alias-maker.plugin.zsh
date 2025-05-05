@@ -74,9 +74,9 @@ function amd() {
     fi
 
     # Delete the alias from .zshrc
-    sed -i.bak "/alias $alias_name=/d" ~/.zshrc
+    sed -i.bak "/alias $alias_name=/d" ~/.zshrc_aliases
     # Remove backup file
-    rm ~/.zshrc.bak
+    rm ~/.zshrc_aliases.bak
     # Unset the alias
     unalias $alias_name
     echo "Alias '$alias_name' has been deleted."
