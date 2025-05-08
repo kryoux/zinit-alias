@@ -3,9 +3,9 @@ declare -r alias_maker_version="1.0.0"
 declare -r alias_maker_name="alias-maker"
 
 # Check if .zshrc_aliases file exists
-if [[ ! -f "$HOME/.zshrc" ]]; then
+if [[ ! -f "$HOME/.zsh_aliases" ]]; then
     echo "Creating aliases file..."
-    touch "$HOME/.zshrc_aliases"
+    touch "$HOME/.zsh_aliases"
 fi
 
 # Define the main function for the alias_maker plugin
@@ -53,7 +53,7 @@ function amc() {
     fi
 
     # Create the new alias and save it to the .zshrc file
-    echo "alias $alias_name=\"$alias_command\"" >>~/.zshrc_aliases
+    echo "alias $alias_name=\"$alias_command\"" >>~/.zsh_aliases
     source ~/.zshrc
 
     # Output the success message
@@ -74,9 +74,9 @@ function amd() {
     fi
 
     # Delete the alias from .zshrc
-    sed -i.bak "/alias $alias_name=/d" ~/.zshrc_aliases
+    sed -i.bak "/alias $alias_name=/d" ~/.zsh_aliases
     # Remove backup file
-    rm ~/.zshrc_aliases.bak
+    rm ~/.zsh_aliases.bak
     # Unset the alias
     unalias $alias_name
     echo "Alias '$alias_name' has been deleted."
@@ -85,10 +85,10 @@ function amd() {
 # Define a function to list all custom zsh aliases
 function list_aliases() {
     local -a aliases=()
-    local rc_file="$HOME/.zshrc_aliases"
+    local rc_file="$HOME/.zsh_aliases"
     # Check if .zshrc_aliases file exists
     if [ ! -f "$rc_file" ]; then
-        echo "No .zshrc_aliases file found." >&2
+        echo "No .zsh_aliases file found." >&2
         return 1
     fi
 
@@ -101,7 +101,7 @@ function list_aliases() {
 
     # Check if any aliases were found
     if [ ${#aliases[@]} -gt 0 ]; then
-        echo "🔧 Custom aliases found in $HOME/.zshrc_aliases:"
+        echo "🔧 Custom aliases found in $HOME/.zsh_aliases:"
         echo ""
 
         for alias in "${aliases[@]}"; do
