@@ -3,7 +3,7 @@
 The Alias Maker plugin is a zsh plugin that allows you to easily create and manage custom zsh aliases from the
 command line.
 
-## Installation
+## Installation - Under Construction
 
 1.  Clone the Alias Maker repository:
 
